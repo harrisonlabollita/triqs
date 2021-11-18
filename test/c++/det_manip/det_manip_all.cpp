@@ -100,8 +100,8 @@ struct test {
 
     // Work at fixed order:
     for (auto i : range(N)) {
-      auto x = RNG(10.0);
-      auto y = RNG(10.0);
+      auto x = RNG(20.0);
+      auto y = RNG(20.0);
       DetM_Basic.try_insert(0, 0, x, y);
       DetM_Basic.complete_operation();
 
@@ -122,8 +122,8 @@ struct test {
       auto DetM_Basic2 = DetM_Basic;
       auto DetM_Schur2 = DetM_Schur;
 
-      auto x = RNG(10.0);
-      auto y = RNG(10.0);
+      auto x = RNG(20.0);
+      auto y = RNG(20.0);
 
       double det_old = DetM_Basic2.determinant();
 
@@ -191,10 +191,10 @@ struct test {
       auto DetM_Basic2 = DetM_Basic;
       auto DetM_Schur2 = DetM_Schur;
 
-      auto x0 = RNG(10.0);
-      auto y0 = RNG(10.0);
-      auto x1 = RNG(10.0);
-      auto y1 = RNG(10.0);
+      auto x0 = RNG(20.0);
+      auto y0 = RNG(20.0);
+      auto x1 = RNG(20.0);
+      auto y1 = RNG(20.0);
 
       double det_old = DetM_Basic2.determinant();
 
@@ -263,7 +263,7 @@ struct test {
       auto DetM_Basic2 = DetM_Basic;
       auto DetM_Schur2 = DetM_Schur;
 
-      auto y = RNG(10.0);
+      auto y = RNG(20.0);
 
       double det_old = DetM_Basic2.determinant();
 
@@ -297,7 +297,7 @@ struct test {
       auto DetM_Basic2 = DetM_Basic;
       auto DetM_Schur2 = DetM_Schur;
 
-      auto x = RNG(10.0);
+      auto x = RNG(20.0);
 
       double det_old = DetM_Basic2.determinant();
 
@@ -331,8 +331,8 @@ struct test {
       auto DetM_Basic2 = DetM_Basic;
       auto DetM_Schur2 = DetM_Schur;
 
-      auto x = RNG(10.0);
-      auto y = RNG(10.0);
+      auto x = RNG(20.0);
+      auto y = RNG(20.0);
 
       double det_old = DetM_Basic2.determinant();
 
