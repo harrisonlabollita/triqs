@@ -68,6 +68,12 @@ external_dependency(GTest
   EXCLUDE_FROM_ALL
 )
 
+# -- fmt --
+external_dependency(fmt
+  GIT_REPO https://github.com/fmtlib/fmt
+  GIT_TAG 8.0.1 
+)
+
 # -- itertools --
 external_dependency(itertools
   GIT_REPO https://github.com/TRIQS/itertools
