@@ -46,26 +46,24 @@ namespace triqs::mesh {
     }
     bool operator!=(legendre_domain const &) const = default;
 
+    [[nodiscard]] std::string hdf5_format() const { return "LegendreDomain"; }
+
     /// Write into HDF5
-    friend void h5_write(h5::group fg, std::string_view subgroup_name, legendre_domain const &d) {
-      h5::group gr = fg.create_group(std::string{subgroup_name});
+    friend void h5_write(h5::group fg, std::string const &subgroup_name, legendre_domain const &d) {
+      h5::group gr = fg.create_group(subgroup_name);
       h5_write(gr, "n_max", d.n_max);
       h5_write(gr, "beta", d.beta);
       h5_write(gr, "statistic", (d.statistic == Fermion ? "F" : "B"));
     }
 
-    std::string hdf5_format() const { return "LegendreDomain"; }
-
     /// Read from HDF5
-    friend void h5_read(h5::group fg, std::string_view subgroup_name, legendre_domain &d) {
-      h5::group gr = fg.open_group(std::string{subgroup_name});
-      size_t n;
-      double beta;
+    friend void h5_read(h5::group fg, std::string const &subgroup_name, legendre_domain &d) {
+      h5::group gr = fg.open_group(subgroup_name);
       std::string statistic{};
-      h5_read(gr, "n_max", n);
-      h5_read(gr, "beta", beta);
+      h5_read(gr, "n_max", d.n_max);
+      h5_read(gr, "beta", d.beta);
       h5_read(gr, "statistic", statistic);
-      d = legendre_domain{beta, (statistic == "F" ? Fermion : Boson), n};
+      d.statistic = "F" ? Fermion : Boson;
     }
 
     //  BOOST Serialization
