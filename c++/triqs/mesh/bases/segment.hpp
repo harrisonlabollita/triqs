@@ -28,7 +28,7 @@ namespace triqs::mesh {
   struct segment_mesh : linear_mesh<real_domain> {
     using B        = linear_mesh<real_domain>;
     segment_mesh() = default;
-    segment_mesh(double x_min, double x_max, int n_freq) : B(typename B::domain_t(), x_min, x_max, n_freq) {}
+    segment_mesh(double x_min, double x_max, int n_freq) : B(real_domain{}, x_min, x_max, n_freq) {}
   };
 
 } // namespace triqs::mesh

@@ -76,7 +76,7 @@ namespace triqs::mesh {
      * @param tail_order : order of computation of the tail
      * @param option tells whether the mesh is defined for all frequencies or only for positive frequencies
      */
-    imfreq(domain_t dom, long n_pts = 1025, option opt = option::all_frequencies) : _dom(std::move(dom)), _n_pts(n_pts), _opt(opt) {
+    imfreq(domain_t dom, size_t n_pts = 1025, option opt = option::all_frequencies) : _dom(std::move(dom)), _n_pts(n_pts), _opt(opt) {
       _last_index = n_pts - 1; // total number of points
       if (opt == option::positive_frequencies_only) {
         _first_index = 0;
@@ -94,7 +94,7 @@ namespace triqs::mesh {
      * @param n_pts defined as n_pts = n_max + 1 (n_max: last matsubara index)
      * @param option tells whether the mesh is defined for all frequencies or only for positive frequencies
      */
-    imfreq(double beta, statistic_enum S, long n_pts = 1025, option opt = option::all_frequencies) : imfreq({beta, S}, n_pts, opt) {}
+    imfreq(double beta, statistic_enum S, size_t n_pts = 1025, option opt = option::all_frequencies) : imfreq({beta, S}, n_pts, opt) {}
 
     /**
      * @param dom
@@ -225,7 +225,7 @@ namespace triqs::mesh {
       int pos_freq = 0;
       if (gr.has_key("positive_freq_only")) h5_read(gr, "positive_freq_only", pos_freq);
       if (gr.has_key("start_at_0")) h5_read(gr, "start_at_0", pos_freq); // backward compatibility only
-      int n_pts = (pos_freq ? L : (L + 1) / 2); // positive freq, size is correct, otherwise divide by 2 (euclidian, ok for bosons).
+      size_t n_pts = (pos_freq ? L : (L + 1) / 2); // positive freq, size is correct, otherwise divide by 2 (euclidian, ok for bosons).
       auto opt  = (pos_freq == 1 ? option::positive_frequencies_only : option::all_frequencies);
       m         = imfreq{std::move(dom), n_pts, opt};
     }
@@ -245,7 +245,7 @@ namespace triqs::mesh {
     // ------------------------------------------------
     private:
     domain_t _dom;
-    int _n_pts;
+    size_t _n_pts;
     option _opt;
     long _first_index, _last_index;
   };

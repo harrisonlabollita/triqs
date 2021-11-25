@@ -48,14 +48,14 @@ namespace triqs::mesh {
     * @param d domain
     * @param n_time_slices number of time slices
     */
-    imtime(matsubara_time_domain d, long n_time_slices) : B(d, 0, d.beta, n_time_slices) {}
+    imtime(matsubara_time_domain d, size_t n_time_slices) : B(d, 0, d.beta, n_time_slices) {}
 
     /**
     * @param beta inverse temperature
     * @param S statistic (Fermion/Boson)
     * @param n_time_slices number of time slices
     */
-    imtime(double beta, statistic_enum S, long n_time_slices) : imtime({beta, S}, n_time_slices) {}
+    imtime(double beta, statistic_enum S, size_t n_time_slices) : imtime({beta, S}, n_time_slices) {}
 
     // -------------------- print -------------------
 
