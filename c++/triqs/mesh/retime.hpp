@@ -19,10 +19,13 @@
 
 #pragma once
 #include "./bases/segment.hpp"
+#include "triqs/mesh/domains/real_complex.hpp"
 
 namespace triqs::mesh {
 
   struct retime : segment_mesh {
+    // using linear_mesh_base<retime, real_domain>:: ;
+
     using segment_mesh::segment_mesh;
     // template <typename... T> retime(T &&... x) : segment_mesh(std::forward<T>(x)...) {}
 
