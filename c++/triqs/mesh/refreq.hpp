@@ -18,15 +18,15 @@
 // Authors: Michel Ferrero, Olivier Parcollet, Nils Wentzell
 
 #pragma once
-#include "./bases/segment.hpp"
 #include "./details/tail_fitter.hpp"
 
 namespace triqs::mesh {
 
-  struct refreq : segment_mesh, tail_fitter_handle {
+  struct refreq : linear_mesh<real_domain>, tail_fitter_handle {
 
-    template <typename... T> refreq(T &&... x) : segment_mesh(std::forward<T>(x)...) {}
-    // using segment_mesh::segment_mesh;
+    refreq() = default;
+    refreq(double x_min, double x_max, int n_freq) : linear_mesh<real_domain>(real_domain{}, x_min, x_max, n_freq) {}
+    template <typename... T> refreq(T &&... x) : linear_mesh<real_domain>(std::forward<T>(x)...) {}
 
     /// Is the mesh only for positive omega
     static constexpr bool positive_only() { return false; }

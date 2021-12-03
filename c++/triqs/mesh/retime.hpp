@@ -18,16 +18,15 @@
 // Authors: Michel Ferrero, Olivier Parcollet, Nils Wentzell
 
 #pragma once
-#include "./bases/segment.hpp"
 #include "triqs/mesh/domains/real_complex.hpp"
 
 namespace triqs::mesh {
 
-  struct retime : segment_mesh {
-    // using linear_mesh_base<retime, real_domain>:: ;
+  struct retime : linear_mesh<real_domain> {
 
-    using segment_mesh::segment_mesh;
-    // template <typename... T> retime(T &&... x) : segment_mesh(std::forward<T>(x)...) {}
+    retime() = default;
+    retime(double x_min, double x_max, int n_freq) : linear_mesh<real_domain>(real_domain{}, x_min, x_max, n_freq) {}
+    template <typename... T> retime(T &&... x) : linear_mesh<real_domain>(std::forward<T>(x)...) {}
 
     static std::string hdf5_format() { return "MeshReTime"; }
 
