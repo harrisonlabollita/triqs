@@ -31,18 +31,18 @@ namespace triqs::mesh {
 
     double beta              = 0.0;
     statistic_enum statistic = Fermion;
-    size_t n_max            = 1; // Is this inclusive order not??
+    long n_max            = 1; // Is this inclusive order not??
 
     [[nodiscard]] constexpr point_t min() const { return 0; }
     [[nodiscard]] point_t max() const { return n_max; }
 
     // Do we need this ctor??
     legendre_domain() = default;
-    legendre_domain(double beta_, statistic_enum statistic_, point_t n_max_) : beta{beta_}, statistic{statistic_}, n_max{n_max_} {};
+    legendre_domain(double beta_, statistic_enum statistic_, long n_max_) : beta{beta_}, statistic{statistic_}, n_max{n_max_} {};
 
     [[nodiscard]] bool is_in_domain(point_t const &pt) const { return (0 <= pt) && (pt <= n_max); };
 
-    [[nodiscard]] size_t size() const { return n_max + 1; };
+    [[nodiscard]] long size() const { return n_max + 1; };
 
     bool operator==(legendre_domain const &) const = default;
 
