@@ -52,9 +52,7 @@ namespace triqs::mesh {
 
     // -------------- Evaluation of a function on the grid --------------------------
 
-    std::array<std::pair<linear_index_t, one_t>, 1> get_interpolation_data(index_t const &x) const {
-      return {std::pair<linear_index_t, one_t>{index_to_linear(index_modulo(x)), {}}};
-    }
+
 
     // ------------------- Comparison -------------------
 
@@ -91,4 +89,10 @@ namespace triqs::mesh {
       } catch (std::runtime_error const &re) {}
     }
   };
+
+    inline std::array<std::pair<cyclat::linear_index_t, one_t>, 1> get_interpolation_data(cyclat const & m, cyclat::index_t const &x)  {
+      return {std::pair<cyclat::linear_index_t, one_t>{m.index_to_linear(m.index_modulo(x)), {}}};
+    }
+
+
 } // namespace triqs::mesh

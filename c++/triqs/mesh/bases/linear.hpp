@@ -26,38 +26,6 @@
 #include <stdexcept>
 namespace triqs::mesh {
 
-  // /**
-  //  * Fit the two closest points for x on [x_min, x_max], with a linear weight w
-  //  * @param x : the point
-  //  * @param i_max : maximum index
-  //  * @param x_min : the window starts. It ends at x_min + i_max* delta_x
-  //  * @param delta_x
-  //  *
-  //  *
-  //  * Throws if x is not in the window
-  //  * */
-  // inline std::array<std::pair<long, double>, 2> interpolate_on_segment(double x, double x_min, double delta_x, long imax) {
-  //   double a = (x - x_min) / delta_x;
-  //   long i   = std::floor(a);
-  //   bool in  = (i >= 0) && (i < imax);
-  //   double w = a - i;
-  //   // We include both x_min and x_max and account
-  //   // for a small rounding error margin of 1e-8 for w
-  //   if (i == imax) {
-  //     --i;
-  //     in = (std::abs(w) < 1.e-8);
-  //     w  = 1.0;
-  //   }
-  //   if (i == -1) {
-  //     i  = 0;
-  //     in = (std::abs(1 - w) < 1.e-8);
-  //     w  = 0.0;
-  //   }
-  //   if (!in) TRIQS_RUNTIME_ERROR << "out of window x= " << x << " xmin = " << x_min << " xmax = " << x_min + imax * delta_x;
-  //   return {std::pair<long, double>{i, 1 - w}, std::pair<long, double>{i + 1, w}};
-  // }
-  //-----------------------------------------------------------------------
-
   template <Domain D>
   requires std::totally_ordered<typename D::point_t> // Addable and dividable
   class linear_mesh  {
@@ -223,5 +191,45 @@ namespace triqs::mesh {
     void reset() { _index = 0; }
     // mesh_t const &mesh() const { return *m; }
   };
+
+  //-----------------------------------------------------------------------
+
+  /**
+   * Fit the two closest points for x on [x_min, x_max], with a linear weight w
+   * @param x : the point
+   * @param i_max : maximum index
+   * @param x_min : the window starts. It ends at x_min + i_max* delta_x
+   * @param delta_x
+   *
+   *
+   * Throws if x is not in the window
+   * */
+  inline std::array<std::pair<long, double>, 2> interpolate_on_segment(double x, double x_min, double delta_x, long imax) {
+    double a = (x - x_min) / delta_x;
+    long i   = std::floor(a);
+    bool in  = (i >= 0) && (i < imax);
+    double w = a - i;
+    // We include both x_min and x_max and account
+    // for a small rounding error margin of 1e-8 for w
+    if (i == imax) {
+      --i;
+      in = (std::abs(w) < 1.e-8);
+      w  = 1.0;
+    }
+    if (i == -1) {
+      i  = 0;
+      in = (std::abs(1 - w) < 1.e-8);
+      w  = 0.0;
+    }
+    if (!in) TRIQS_RUNTIME_ERROR << "out of window x= " << x << " xmin = " << x_min << " xmax = " << x_min + imax * delta_x;
+    return {std::pair<long, double>{i, 1 - w}, std::pair<long, double>{i + 1, w}};
+  }
+
+
+  template <typename Domain> inline std::array<std::pair<long, double>, 2> get_interpolation_data(linear_mesh<Domain> const &m, double x) {
+    return interpolate_on_segment(x, m.x_min(), m.delta(), long(m.size()) - 1);
+  }
+
+  //-----------------------------------------------------------------------
 
 } // namespace triqs::mesh
