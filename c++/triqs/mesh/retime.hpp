@@ -27,7 +27,6 @@ namespace triqs::mesh {
 
     retime() = default;
     retime(double x_min, double x_max, int n_freq) : linear_mesh(real_domain{}, x_min, x_max, n_freq) {}
-    template <typename... T> retime(T &&...x) : linear_mesh(std::forward<T>(x)...) {}
 
     static std::string hdf5_format() { return "MeshReTime"; }
 
