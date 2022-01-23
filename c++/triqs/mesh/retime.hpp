@@ -24,14 +24,13 @@
 namespace triqs::mesh {
 
   struct retime : linear_mesh<real_domain> {
-
     retime() = default;
-    retime(double x_min, double x_max, int n_freq) : linear_mesh(real_domain{}, x_min, x_max, n_freq) {}
+    retime(real_domain::point_t x_min, real_domain::point_t x_max, long n_freq) : linear_mesh(real_domain{}, x_min, x_max, n_freq) {}
 
+    // -------------------- HDF5 -------------------
     static std::string hdf5_format() { return "MeshReTime"; }
-
     friend void h5_write(h5::group fg, std::string const &subgroup_name, retime const &m) { h5_write_impl(fg, subgroup_name, m, "MeshReTime"); }
-
     friend void h5_read(h5::group fg, std::string const &subgroup_name, retime &m) { h5_read_impl(fg, subgroup_name, m, "MeshReTime"); }
   };
+  
 } // namespace triqs::mesh

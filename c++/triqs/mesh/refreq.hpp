@@ -25,10 +25,8 @@
 namespace triqs::mesh {
 
   struct refreq : linear_mesh<real_domain>, tail_fitter_handle {
-
     refreq() = default;
-    refreq(double x_min, double x_max, int n_freq) : linear_mesh<real_domain>(real_domain{}, x_min, x_max, n_freq) {}
-    template <typename... T> refreq(T &&... x) : linear_mesh<real_domain>(std::forward<T>(x)...) {}
+    refreq(real_domain::point_t x_min, real_domain::point_t x_max, long n_freq) : linear_mesh<real_domain>(real_domain{}, x_min, x_max, n_freq) {}
 
     /// Is the mesh only for positive omega
     static constexpr bool positive_only() { return false; }
@@ -45,11 +43,8 @@ namespace triqs::mesh {
     double omega_max() const { return index_to_point(last_index()); }
 
     // -------------------- HDF5 -------------------
-
     static std::string hdf5_format() { return "MeshReFreq"; }
-
     friend void h5_write(h5::group fg, std::string const &subgroup_name, refreq const &m) { h5_write_impl(fg, subgroup_name, m, "MeshReFreq"); }
-
     friend void h5_read(h5::group fg, std::string const &subgroup_name, refreq &m) { h5_read_impl(fg, subgroup_name, m, "MeshReFreq"); }
   };
 
