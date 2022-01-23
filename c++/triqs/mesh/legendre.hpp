@@ -19,21 +19,19 @@
 
 #pragma once
 #include "./domains/legendre.hpp"
-#include "./discrete.hpp"
+#include "bases/linear.hpp"
 
 namespace triqs::mesh {
 
-  ///
-  struct legendre : discrete<legendre_domain> {
-    using B = discrete<legendre_domain>;
-
+  struct legendre : public linear_mesh<legendre_domain> {
     legendre() = default;
-    legendre(double beta, statistic_enum S, size_t n_leg) : B(typename B::domain_t(beta, S, n_leg)) {}
+    legendre(legendre_domain domain) : linear_mesh(std::move(domain), 0, domain.n_max, domain.n_max + 1) {}
+    legendre(double beta, statistic_enum S, long n_max) : linear_mesh(legendre_domain(beta, S, n_max), 0, n_max, n_max + 1) {}
 
+    // -------------------- HDF5 -------------------
     static std::string hdf5_format() { return "MeshLegendre"; }
-
     friend void h5_write(h5::group fg, std::string const &subgroup_name, legendre const &m) { h5_write_impl(fg, subgroup_name, m, "MeshLegendre"); }
-
     friend void h5_read(h5::group fg, std::string const &subgroup_name, legendre &m) { h5_read_impl(fg, subgroup_name, m, "MeshLegendre"); }
   };
+
 } // namespace triqs::mesh
