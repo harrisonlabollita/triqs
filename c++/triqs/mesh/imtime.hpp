@@ -34,41 +34,32 @@ namespace triqs::mesh {
    *
    *  @figure ../../../triqs/mesh/matsubara_imtime.png: Pictorial representation of ``imtime{beta, Fermion/Boson, 4}``.
    */
-  class imtime : public linear_mesh<matsubara_time_domain> {
-    using B = linear_mesh<matsubara_time_domain>;
-
-    public:
-    ///
+  struct imtime : public linear_mesh<matsubara_time_domain> {
+    // -------------------- Ctor -------------------
     imtime() = default;
-
-    ///
-    imtime(imtime const &x) = default;
 
     /**
     * @param d domain
     * @param n_time_slices number of time slices
     */
-    imtime(matsubara_time_domain d, size_t n_time_slices) : B(d, 0, d.beta, n_time_slices) {}
+    imtime(matsubara_time_domain d, long n_time_slices) : linear_mesh<matsubara_time_domain>(std::move(d), 0, d.beta, n_time_slices) {}
 
     /**
     * @param beta inverse temperature
     * @param S statistic (Fermion/Boson)
     * @param n_time_slices number of time slices
     */
-    imtime(double beta, statistic_enum S, size_t n_time_slices) : imtime({beta, S}, n_time_slices) {}
+    imtime(double beta, statistic_enum S, long n_time_slices) : imtime({beta, S}, n_time_slices) {}
 
-    // -------------------- print -------------------
+    // -------------------- Print -------------------
 
     friend std::ostream &operator<<(std::ostream &sout, imtime const &m) {
       return sout << "Imaginary Time Mesh of size " << m.size() << ", Domain: " << m.domain();
     }
 
-    // -------------------- hdf5 -------------------
-
+    // -------------------- HDF5 -------------------
     static std::string hdf5_format() { return "MeshImTime"; }
-
     friend void h5_write(h5::group fg, std::string const &subgroup_name, imtime const &m) { h5_write_impl(fg, subgroup_name, m, "MeshImTime"); }
-
     friend void h5_read(h5::group fg, std::string const &subgroup_name, imtime &m) { h5_read_impl(fg, subgroup_name, m, "MeshImTime"); }
   };
 
