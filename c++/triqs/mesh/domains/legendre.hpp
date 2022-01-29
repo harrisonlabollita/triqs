@@ -65,13 +65,5 @@ namespace triqs::mesh {
       h5_read(gr, "statistic", statistic);
       d.statistic = "F" ? Fermion : Boson;
     }
-
-    //  BOOST Serialization
-    friend class boost::serialization::access;
-    template <class Archive> void serialize(Archive &ar, const unsigned int version) {
-      ar &n_max;
-      ar &beta;
-      ar &statistic;
-    }
   };
 } // namespace triqs::mesh
