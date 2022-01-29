@@ -31,7 +31,7 @@ namespace triqs::mesh {
 
     double beta              = 0.0;
     statistic_enum statistic = Fermion;
-    long n_max            = 1; // Note: includes endpoint. Change from previous?
+    long n_max               = 1; // Note: includes endpoint. Change from previous?
 
     [[nodiscard]] constexpr point_t min() const { return 0; }
     [[nodiscard]] point_t max() const { return n_max; }
@@ -40,7 +40,7 @@ namespace triqs::mesh {
     legendre_domain() = default;
     legendre_domain(double beta_, statistic_enum statistic_, long n_max_) : beta{beta_}, statistic{statistic_}, n_max{n_max_} {};
 
-    [[nodiscard]] bool is_in_domain(point_t const &pt) const { return (0 <= pt) && (pt <= n_max); };
+    [[nodiscard]] bool contains(point_t const &pt) const { return (0 <= pt) && (pt <= n_max); };
 
     [[nodiscard]] long size() const { return n_max + 1; };
 
@@ -58,7 +58,7 @@ namespace triqs::mesh {
 
     /// Read from HDF5
     friend void h5_read(h5::group fg, std::string const &subgroup_name, legendre_domain &d) {
-      h5::group gr = fg.open_group(subgroup_name);
+      h5::group gr          = fg.open_group(subgroup_name);
       std::string statistic = " ";
       h5_read(gr, "n_max", d.n_max);
       h5_read(gr, "beta", d.beta);
