@@ -105,9 +105,15 @@ namespace triqs::mesh {
 
     // -------------------------- Range & Iteration --------------------------
 
-    auto begin() const { return r_.begin(); }
+    auto begin() const {
+      r_ = make_mesh_range(*this);
+      return r_.begin();
+    }
     auto end() const { return r_.end(); }
-    auto cbegin() const { return r_.cbegin(); }
+    auto cbegin() const {
+      r_ = make_mesh_range(*this);
+      return r_.cbegin();
+    }
     auto cend() const { return r_.cend(); }
 
     //  -------------------------- HDF5  --------------------------
@@ -144,7 +150,7 @@ namespace triqs::mesh {
     D _dom;
     long L;
     domain_pt_t xmin, xmax, del;
-    make_mesh_range_rtype<linear_mesh> r_;
+    mutable make_mesh_range_rtype<linear_mesh> r_;
     size_t mesh_hash_ = 0;
   };
 
