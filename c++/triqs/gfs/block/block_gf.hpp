@@ -206,6 +206,7 @@ namespace triqs::gfs {
     {
 
       for (auto const &[bl_name, bl_size] : gf_struct) {
+        EXPECTS(bl_size > 0);
         _block_names.push_back(bl_name);
         if constexpr (Target::rank == 0)
           _glist.emplace_back(m);
