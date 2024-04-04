@@ -147,6 +147,9 @@ m = make_mesh( py_type = "MeshDLRImFreq", c_tag = "dlr_imfreq",
             and number of frequencies
         """)
 m.add_constructor(signature = "(double beta, statistic_enum statistic, double w_max, double eps, bool symmetrize = false)")
+m.add_constructor(signature = "(dlr M)")
+m.add_constructor(signature = "(dlr_imfreq M)")
+m.add_constructor(signature = "(dlr_imtime M)")
 m.add_property(name = "beta",
                getter = cfunction(calling_pattern="double result = self_c.beta()",
                signature = "double()",
@@ -228,6 +231,9 @@ m = make_mesh(py_type = "MeshDLRImTime", c_tag = "dlr_imtime",
             and number of tau-points
         """)
 m.add_constructor(signature = "(double beta, statistic_enum statistic, double w_max, double eps, bool symmetrize = false)")
+m.add_constructor(signature = "(dlr M)")
+m.add_constructor(signature = "(dlr_imfreq M)")
+m.add_constructor(signature = "(dlr_imtime M)")
 m.add_property(name = "beta",
                getter = cfunction(calling_pattern="double result = self_c.beta()",
                signature = "double()",
@@ -276,6 +282,9 @@ m = make_mesh(py_type = "MeshDLR", c_tag = "dlr",
             For fermionic/bosonic statistic enforces even/odd dlr-rank [default = false]
         """)
 m.add_constructor(signature = "(double beta, statistic_enum statistic, double w_max, double eps, bool symmetrize = false)")
+m.add_constructor(signature = "(dlr M)")
+m.add_constructor(signature = "(dlr_imfreq M)")
+m.add_constructor(signature = "(dlr_imtime M)")
 m.add_property(name = "beta",
                getter = cfunction(calling_pattern="double result = self_c.beta()",
                signature = "double()",
