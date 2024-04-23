@@ -54,9 +54,13 @@ class test_Gf_Block(unittest.TestCase):
         assert_block_gfs_are_close(B1, B2)
         assert_block_gfs_are_close(B1, B3)
 
+        # Scalar-valued blocks
+        gf_struct = [('1',0), ('2',0), ('3',0)]
+        B4 = BlockGf(mesh=self.iw_mesh, gf_struct=gf_struct)
+
         # Map_block functionality
-        B4 = map_block(lambda x: 2*x, B3)
-        assert_block_gfs_are_close(B4, 2*B3)
+        B5 = map_block(lambda x: 2*x, B3)
+        assert_block_gfs_are_close(B5, 2*B3)
 
     def test_real_imag(self):
 
