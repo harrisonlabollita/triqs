@@ -29,6 +29,8 @@ new ideas and algorithms, while benefiting from the performance of a compiled la
 
 TRIQS started in 2005 as a collaboration between IPhT Saclay and Ecole Polytechnique,
 and has since seen contributions from a large number of research groups around the world.
+The initial publication `Comput. Phys. Commun. 196 398 <https://doi.org/10.1016/j.cpc.2015.04.023>`_
+has been cited by more than 300 peer-reviewed publications.
 
 TRIQS is free software distributed under the GPL license.
 
@@ -63,16 +65,30 @@ The TRIQS library is built on a set of stand-alone core libraries providing impo
 * `TRIQS/nda <https://github.com/triqs/nda>`_ : a C++ library providing an efficient and flexible multi-dimensional array class
 
 
+.. _numerical_algorithms:
 Numerical Algorithms
 --------------------
 
 TRIQS provides implementations of advanced numerical algorithms that are directly relevant to
 the study of interacting quantum systems, for example:
 
+* Orthogonal polynomial representation of imaginary-time Green’s functions `Phys. Rev. B 84 075145 <https://doi.org/10.1103/PhysRevB.84.075145>`_
+
 * Discrete Lehmann representation of imaginary time Green's functions `Phys. Rev. B 105 235115 <https://doi.org/10.1103/PhysRevB.105.235115>`_
   through the cppdlr library `arXiv.2404.02334 <https://doi.org/10.48550/arXiv.2404.02334>`_
 
 * Constrained residual minimization Dyson Solver `arXiv:2310.01266 <https://doi.org/10.48550/arXiv.2310.01266>`_
+
+Please cite the relevant papers when using these algorithms in your research.
+
+
+TRIQS Community
+---------------
+
+Connect with fellow users and developers through our `TRIQS Slack Workspace <https://github.com/TRIQS/slack>`_,
+where you can share insights, ask questions, and get involved in the development of TRIQS and applications.
+We also provide information about new software releases and events such as summer schools and our annual
+TRIQS Community Meeting. We look forward to welcoming you to our community!
 
 
 Where to start?
