@@ -31,6 +31,7 @@ RUN apt-get update && apt-get install -y lsb-release wget software-properties-co
 
 ENV PYTHON_VERSION=3.10 \
     CC=icx CXX=icpx CXXFLAGS="-stdlib=libc++" \
+    CPLUS_INCLUDE_PATH=/usr/lib/llvm-${LLVM}/include/c++/v1 \
     VIRTUAL_ENV=/home/venv \
     PATH=/home/venv/bin:$PATH
 
